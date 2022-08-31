@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/ton.css">
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<header>
+    <div id="logo">
+        <a href="{{ path('index') }}">
+            <img alt="" src="/design/logo.png" width="336" height="88">
+        </a>
+    </div>
+    <div id="lang">{% include 'lang.html.twig' %}</div>
+    <div id="user">
+    </div>
+    <div id="ip">
+        {{ app.request.getClientIp }}
+    </div>
+    <div id="cart">
+    </div>
+    <div id="profile">
+    </div>
+    <img alt="" src="/design/top.png">
+    <nav>{% include 'menu.html.twig' %}</nav>
+</header>
+<div id="main">
+    <aside id="left">
+        {{ 'Каталог'|trans }}
+        <ul>
+            <li>
+                <a href="">{{ 'все'|trans }}</a>
+                <br><br>
+            </li>
+            {% for type in types %}
+                <li>
+                    {% if type.active %}
+                        <b>">{{ type.name }}</a></b>
+                    {% else %}
+                        <a href="">{{ type.name }}</a>
+                    {% endif %}
+                    ({{ type.count }})
+                    <br><br>
+                </li>
+            {% endfor %}
+        </ul>
+    </aside>
+    <aside id="right">
+        {{ 'Производители'|trans }}
+    </aside>
+    <main role="main">
+        {% block body %}{% endblock %}
+    </main>
+
+</div>
+</body>
+</html>

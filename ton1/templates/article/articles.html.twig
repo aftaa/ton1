@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "Статьи"|trans }}{% endblock %}
+
+{% block body %}
+    {% for article in articles %}
+        {{ article.title }}
+        <br><br>
+    {% endfor %}
+{% endblock %}
